@@ -1,0 +1,91 @@
+name: Build Packer Image
+
+on:
+  workflow_call:
+    inputs:
+      packer_version:
+        required: false
+        type: string
+        default: 1.10.2
+        description: Version of packer to use.
+      packer_folder:
+        required: true
+        type: string
+        description: Packer file path to use.
+      compute_gallery_rg:
+        required: true
+        type: string
+        description: Resource group of the destination compute gallery.
+      compute_gallery:
+        required: true
+        type: string
+        description: Name of the destination compute gallery.
+      image_definition:
+        required: true
+        type: string
+        description: Name of the destination image definition.
+      client_id:
+        required: true
+        type: string
+        description: Azure service principal client ID.
+      tenant_id:
+        type: string
+        description: Azure service princiapl teanant ID.
+      subscription_id:
+        required: true
+        type: string
+        description:  Azure service princiapl subscription ID.
+    secrets:
+      client_secret:
+        required: true
+        description:  Azure service princiapl client secret.
+
+jobs:
+  build:
+    name: Packer Build
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ${{ inputs.packer_folder }}
+
+    steps:      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Azure CLI
+        uses: azure/login@v2
+        with:
+          creds: '{"clientId":"${{ inputs.client_id }}","clientSecret":"${{ secrets.client_secret }}","subscriptionId":"${{ inputs.subscription_id }}","tenantId":"${{ inputs.tenant_id }}"}'
+
+      - name: Setup packer
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: ${{ inputs.packer_version }}
+      
+      - name: Run packer init
+        id: init
+        run: "packer init ."
+
+      - name: Run packer validate
+        id: validate
+        run: "packer validate ."
+
+      - name: Generate build number
+        id: buildnumber
+        uses: onyxmueller/build-tag-number@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prefix: ${{ inputs.image_definition }}
+
+      - name: Build image
+        id: build
+        run: "packer build ."
+        env:
+          PKR_VAR_shared_image_version: "1.0.${{ steps.buildnumber.outputs.build_number }}"
+          PKR_VAR_shared_image_gallery_rg: "${{ inputs.compute_gallery_rg }}"
+          PKR_VAR_shared_image_gallery: "${{ inputs.compute_gallery }}"
+          PKR_VAR_shared_image: "${{ inputs.image_definition }}"
+          PKR_VAR_encoded_credentials: "${{ secrets.ENCODED_CREDENTIALS }}"
+          PKR_VAR_aqua_token: "${{ secrets.AQUA_TOKEN }}"
