@@ -55,11 +55,6 @@ jobs:
           repository: VaidheeswaranS/packer-builds-shared-workflows
           path: called
 
-      - name: list contents
-        run: |
-            pwd
-            ls -la
-
       - name: Setup Azure CLI
         uses: azure/login@v2
         with:
