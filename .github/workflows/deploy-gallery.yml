@@ -32,13 +32,6 @@ on:
         description: Azure service principal client secret.
 
 env:
-  ARM_CLIENT_ID: ${{ inputs.client_id }}
-  ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
-  ARM_TENANT_ID: ${{ inputs.tenant_id }}
-  ARM_SUBSCRIPTION_ID: ${{ inputs.subscription_id }}
-  TF_VAR_rg: ${{ inputs.compute_gallery_rg }}
-  TF_VAR_shared_gallery: ${{ inputs.compute_gallery }}
-  TF_VAR_image_definition: ${{ inputs.image_definition }}
   WD: called/shell-script
 
 jobs:
@@ -62,16 +55,21 @@ jobs:
           repository: VaidheeswaranS/packer-builds-shared-workflows
           path: called
 
+      - name: list contents
+        run: |
+            pwd
+            ls -la
+
       - name: Setup Azure CLI
         uses: azure/login@v2
         with:
           creds: '{"clientId":"${{ inputs.client_id }}","clientSecret":"${{ secrets.client_secret }}","subscriptionId":"${{ inputs.subscription_id }}","tenantId":"${{ inputs.tenant_id }}"}' 
   
-      - name: Create Resource Group, Shared Image Gallery and Shared Image Definition
-        uses: azure/cli@v2
-        with:
-          azcliversion: latest
-          inlineScript: |
-            echo "Running the azure resources provisioning script"
-            chmod +x image-gallery.sh
-            ./image-gallery.sh ${{ inputs.compute_gallery_rg }} ${{ inputs.compute_gallery }} ${{ inputs.image_definition }}
+    #   - name: Create Resource Group, Shared Image Gallery and Shared Image Definition
+    #     uses: azure/cli@v2
+    #     with:
+    #       azcliversion: latest
+    #       inlineScript: |
+    #         echo "Running the azure resources provisioning script"
+    #         chmod +x image-gallery.sh
+    #         ./image-gallery.sh ${{ inputs.compute_gallery_rg }} ${{ inputs.compute_gallery }} ${{ inputs.image_definition }}
