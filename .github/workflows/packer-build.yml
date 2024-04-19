@@ -81,7 +81,7 @@ jobs:
 
       - name: Build image
         id: build
-        run: "packer build ."
+        run: "packer build -timestamp-ui ."
         env:
           PKR_VAR_shared_image_version: "1.0.${{ steps.buildnumber.outputs.build_number }}"
           PKR_VAR_shared_image_gallery_rg: "${{ inputs.compute_gallery_rg }}"
