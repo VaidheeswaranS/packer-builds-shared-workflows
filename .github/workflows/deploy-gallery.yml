@@ -65,11 +65,11 @@ jobs:
         with:
           creds: '{"clientId":"${{ inputs.client_id }}","clientSecret":"${{ secrets.client_secret }}","subscriptionId":"${{ inputs.subscription_id }}","tenantId":"${{ inputs.tenant_id }}"}' 
   
-    #   - name: Create Resource Group, Shared Image Gallery and Shared Image Definition
-    #     uses: azure/cli@v2
-    #     with:
-    #       azcliversion: latest
-    #       inlineScript: |
-    #         echo "Running the azure resources provisioning script"
-    #         chmod +x image-gallery.sh
-    #         ./image-gallery.sh ${{ inputs.compute_gallery_rg }} ${{ inputs.compute_gallery }} ${{ inputs.image_definition }}
+      - name: Create Resource Group, Shared Image Gallery and Shared Image Definition
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            echo "Running the azure resources provisioning script"
+            chmod +x image-gallery.sh
+            ./image-gallery.sh ${{ inputs.compute_gallery_rg }} ${{ inputs.compute_gallery }} ${{ inputs.image_definition }}
