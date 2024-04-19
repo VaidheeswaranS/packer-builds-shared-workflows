@@ -71,7 +71,8 @@ jobs:
           azcliversion: latest
           inlineScript: |
             echo "Running the azure resources provisioning script"
-            cd ${{ env.WD }}
-            ls -la ${{ env.WD }}
-            chmod +x image-gallery.sh
-            ./image-gallery.sh ${{ inputs.compute_gallery_rg }} ${{ inputs.compute_gallery }} ${{ inputs.image_definition }}
+            pwd
+            ls -la called/
+            ls -la caller/
+            # chmod +x image-gallery.sh
+            # ./image-gallery.sh ${{ inputs.compute_gallery_rg }} ${{ inputs.compute_gallery }} ${{ inputs.image_definition }}
