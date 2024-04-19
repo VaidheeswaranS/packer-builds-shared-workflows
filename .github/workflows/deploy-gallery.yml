@@ -59,7 +59,7 @@ jobs:
       - name: Checkout shared-workflows repository
         uses: actions/checkout@v4
         with:
-          repository: packer-builds-shared-workflows
+          repository: VaidheeswaranS/packer-builds-shared-workflows
           path: called
 
       - name: Setup Azure CLI
