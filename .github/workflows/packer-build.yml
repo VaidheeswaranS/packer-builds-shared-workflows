@@ -87,5 +87,6 @@ jobs:
           PKR_VAR_shared_image_gallery_rg: "${{ inputs.compute_gallery_rg }}"
           PKR_VAR_shared_image_gallery: "${{ inputs.compute_gallery }}"
           PKR_VAR_shared_image: "${{ inputs.image_definition }}"
+          PKR_VAR_baseline_image_gallery_subscription: "${{ inputs.subscription_id }}"
           PKR_VAR_encoded_credentials: "${{ secrets.ENCODED_CREDENTIALS }}"
           PKR_VAR_aqua_token: "${{ secrets.AQUA_TOKEN }}"
