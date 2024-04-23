@@ -42,9 +42,6 @@ on:
         type: string
         description:  Azure service princiapl subscription ID.
     secrets:
-      github-token:
-        required: true
-        description: Shared github access token.
       client_secret:
         required: true
         description: Azure service principal client secret.
