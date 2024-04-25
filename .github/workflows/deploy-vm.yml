@@ -90,9 +90,10 @@ jobs:
         id: validate
         run: terraform validate
 
-      - name: Terraform Destroy
-        id: destroy
-        run: terraform destroy -var-file=gallery.tfvars 'vm_name=${{ inputs.vm_name }}' -auto-approve -input=false
+    #   - name: Terraform Destroy
+    #     id: destroy
+    #     # run: terraform destroy -var-file=gallery.tfvars 'vm_name=${{ inputs.vm_name }}' -auto-approve -input=false
+    #     run: terraform destroy -auto-approve -input=false
 
       - name: Terraform Plan
         id: plan

@@ -10,7 +10,7 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "github-ephemeral-runner"
     storage_account_name = "buildserverartifacts"
-    container_name       = "terraform"
+    container_name       = "terraform-vaidhee-test"
   }
 }
 
