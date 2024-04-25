@@ -2,6 +2,10 @@ data "azurerm_resource_group" "this" {
   name = var.rg
 }
 
+locals {
+  team = join("-", slice(split("_", var.shared_gallery), 0, 2))
+}
+
 resource "azurerm_shared_image_gallery" "this" {
   name                = var.shared_gallery
   resource_group_name = data.azurerm_resource_group.this.name

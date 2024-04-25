@@ -1,0 +1,99 @@
+name: Run Terraform
+
+on:
+  workflow_call:
+    inputs:
+      terraform_version:
+        required: false
+        type: string
+        default: 1.8.0
+        description: Version of terraform to use.
+      vm_size:
+        required: false
+        type: string
+        default: Standard_B2als_v2
+        description: Instance size of the VM to create.
+      vm_name:
+        required: true
+        type: string
+        description: Name of the VM to create.
+      compute_gallery:
+        required: true
+        type: string
+        description: Name of the destination compute gallery.
+      client_id:
+        required: true
+        type: string
+        description: Azure service principal client ID.
+      tenant_id:
+        type: string
+        description: Azure service princiapl teanant ID.
+      subscription_id:
+        required: true
+        type: string
+        description:  Azure service princiapl subscription ID.
+    secrets:
+      github-token:
+        required: true
+        description: Shared github access token.
+      client_secret:
+        required: true
+        description: Azure service principal client secret.
+
+env:
+  ARM_CLIENT_ID: ${{ inputs.client_id }}
+  ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+  ARM_TENANT_ID: ${{ inputs.tenant_id }}
+  ARM_SUBSCRIPTION_ID: ${{ inputs.subscription_id }}
+  WD: called/terraform/virtualmachine
+  TF_VAR_vm_size: ${{ inputs.vm_size }}
+
+jobs:
+  build:
+    name: Call Terraform
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ env.WD }}
+  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: caller
+
+      - name: Checkout shared-workflows repository
+        uses: actions/checkout@v4
+        with:
+          repository: sage/cloudops-shared-workflows
+          path: called
+          token: ${{ secrets.github-token }}
+
+      - name: Pull TFVars
+        uses: actions/download-artifact@v4
+        with:
+          name: gallery.tfvars
+          path: ${{ env.WD }}
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "${{ inputs.terraform_version }}"
+
+      - name: Terraform Init
+        id: init
+        run: 'terraform init -backend-config="key=${{ inputs.compute_gallery }}/${{ inputs.vm_name }}/terraform.tfstate"'
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -var-file=gallery.tfvars -var 'vm_name=${{ inputs.vm_name }}' -auto-approve -input=false
