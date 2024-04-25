@@ -57,10 +57,10 @@ variable "key_vault" {
   description = "ID of the key vault that contains the windows password."
 }
 
-variable "secret_name" {
-  type        = string
-  description = "Name of the secret which contains the windows password."
-}
+# variable "secret_name" {
+#   type        = string
+#   description = "Name of the secret which contains the windows password."
+# }
 
 variable "vm_name" {
   type        = string
