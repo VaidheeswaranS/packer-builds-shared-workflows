@@ -108,31 +108,31 @@ resource "azurerm_windows_virtual_machine" "vm_windows" {
   tags = local.vm_tags
 }
 
-# # AAD Login Extension for Windows VM
-# resource "azurerm_virtual_machine_extension" "aad_login" {
-#   count = var.windows_vm_count
+# AAD Login Extension for Windows VM
+resource "azurerm_virtual_machine_extension" "aad_login" {
+  count = var.windows_vm_count
 
-#   name                       = "AADLoginForWindows"
-#   virtual_machine_id         = azurerm_windows_virtual_machine.vm_windows[count.index].id
-#   publisher                  = "Microsoft.Azure.ActiveDirectory"
-#   type                       = "AADLoginForWindows"
-#   type_handler_version       = "1.0"
-#   auto_upgrade_minor_version = true
+  name                       = "AADLoginForWindows"
+  virtual_machine_id         = azurerm_windows_virtual_machine.vm_windows[count.index].id
+  publisher                  = "Microsoft.Azure.ActiveDirectory"
+  type                       = "AADLoginForWindows"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = true
 
-#   tags = local.vm_tags
-# }
+  tags = local.vm_tags
+}
 
-# // VM's Trusted Launch configuration requires the Integrity Monitor to be installed via only from extension.
-# resource "azurerm_virtual_machine_extension" "integrity_monitoring" {
-#   count = var.integrity_monitoring ? var.windows_vm_count : 0
+// VM's Trusted Launch configuration requires the Integrity Monitor to be installed via only from extension.
+resource "azurerm_virtual_machine_extension" "integrity_monitoring" {
+  count = var.integrity_monitoring ? var.windows_vm_count : 0
 
-#   name                       = "GuestAttestation"
-#   virtual_machine_id         = azurerm_windows_virtual_machine.vm_windows[count.index].id
-#   publisher                  = "Microsoft.Azure.Security.WindowsAttestation"
-#   type                       = "GuestAttestation"
-#   type_handler_version       = "1.0"
-#   auto_upgrade_minor_version = true
-#   automatic_upgrade_enabled  = true
+  name                       = "GuestAttestation"
+  virtual_machine_id         = azurerm_windows_virtual_machine.vm_windows[count.index].id
+  publisher                  = "Microsoft.Azure.Security.WindowsAttestation"
+  type                       = "GuestAttestation"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = true
+  automatic_upgrade_enabled  = true
 
-#   tags = local.vm_tags
-# }
+  tags = local.vm_tags
+}
