@@ -95,9 +95,9 @@ jobs:
     #     # run: terraform destroy -var-file=gallery.tfvars 'vm_name=${{ inputs.vm_name }}' -auto-approve -input=false
     #     run: terraform destroy -auto-approve -input=false
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan
+    #   - name: Terraform Plan
+    #     id: plan
+    #     run: terraform plan
 
     #   - name: Terraform Apply
     #     id: apply
