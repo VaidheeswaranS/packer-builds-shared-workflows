@@ -17,15 +17,15 @@ resource "azurerm_key_vault" "this" {
   sku_name                    = "standard"
 }
 
-resource "azurerm_key_vault_access_policy" "packer" {
-  key_vault_id = azurerm_key_vault.this.id
-  tenant_id    = data.azurerm_client_config.this.tenant_id
-  object_id    = data.azurerm_client_config.this.object_id
+# resource "azurerm_key_vault_access_policy" "packer" {
+#   key_vault_id = azurerm_key_vault.this.id
+#   tenant_id    = data.azurerm_client_config.this.tenant_id
+#   object_id    = data.azurerm_client_config.this.object_id
 
-  secret_permissions = [
-    "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
-  ]
-}
+#   secret_permissions = [
+#     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
+#   ]
+# }
 
 # resource "azurerm_key_vault_access_policy" "users" {
 #   key_vault_id = azurerm_key_vault.this.id
