@@ -11,7 +11,7 @@ output "shared_gallery" {
 }
 
 output "shared_image_baseline" {
-  value = [azurerm_shared_image.baseline.*.name]
+  value = azurerm_shared_image.baseline.*.name
 }
 
 output "shared_image_generalized" {
