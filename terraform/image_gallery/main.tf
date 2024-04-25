@@ -13,8 +13,6 @@ resource "azurerm_shared_image_gallery" "this" {
 }
 
 resource "random_id" "baseline" {
-  # count       = var.image_definition_baseline == "cloudops-shared-baseline-windows2022" ? 1 : 0
-  count       = var.image_definition_baseline == "vaidhee-shared-baseline-windows2022" ? 1 : 0
   prefix      = "2022-datacenter-"
   byte_length = 8
 }
@@ -34,7 +32,7 @@ resource "azurerm_shared_image" "baseline" {
   identifier {
     publisher = "Microsoft"
     offer     = "WindowsServer"
-    sku       = random_id.baseline.*.hex
+    sku       = random_id.baseline.hex
   }
 }
 
