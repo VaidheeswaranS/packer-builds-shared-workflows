@@ -17,3 +17,15 @@ output "shared_image_baseline" {
 output "shared_image_generalized" {
   value = azurerm_shared_image.generalized.name
 }
+
+output "subnet" {
+  value = azurerm_subnet.this.id
+}
+
+output "key_vault" {
+  value = azurerm_key_vault.this.id
+}
+
+output "secret_name" {
+  value = azurerm_key_vault_secret.password.name
+}
