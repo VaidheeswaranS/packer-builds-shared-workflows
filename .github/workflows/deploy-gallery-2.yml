@@ -110,14 +110,6 @@ jobs:
       #   id: destroy
       #   run: terraform destroy -auto-approve -input=false
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan
-
-      - name: Terraform state list
-        id: state
-        run: terraform state list
-
       # - name: Terraform apply refresh
       #   id: refresh
       #   run: terraform apply -refresh-only
