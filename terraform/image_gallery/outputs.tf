@@ -26,6 +26,6 @@ output "key_vault" {
   value = azurerm_key_vault.this.id
 }
 
-output "secret_name" {
-  value = azurerm_key_vault_secret.password.name
-}
+# output "secret_name" {
+#   value = azurerm_key_vault_secret.password.name
+# }

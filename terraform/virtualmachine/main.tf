@@ -1,7 +1,7 @@
-data "azurerm_key_vault_secret" "password" {
-  name         = var.secret_name
-  key_vault_id = var.key_vault
-}
+# data "azurerm_key_vault_secret" "password" {
+#   name         = var.secret_name
+#   key_vault_id = var.key_vault
+# }
 
 module "virtualmachine" {
   source = "../modules/compute"
@@ -16,5 +16,6 @@ module "virtualmachine" {
   vm_size                           = var.vm_size
   windows_vm_count                  = var.vm_count
   admin_username                    = var.windows_username
-  admin_password                    = data.azurerm_key_vault_secret.password.value
+  admin_password                    = "DummyPass$5896"
+  # admin_password                    = data.azurerm_key_vault_secret.password.value
 }

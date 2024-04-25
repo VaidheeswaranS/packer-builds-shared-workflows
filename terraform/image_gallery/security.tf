@@ -37,12 +37,12 @@ resource "azurerm_key_vault_access_policy" "packer" {
 #   ]
 # }
 
-resource "random_password" "password" {
-  length = 16
-}
+# resource "random_password" "password" {
+#   length = 16
+# }
 
-resource "azurerm_key_vault_secret" "password" {
-  name         = "windows-password"
-  value        = random_password.password.result
-  key_vault_id = azurerm_key_vault.this.id
-}
+# resource "azurerm_key_vault_secret" "password" {
+#   name         = "windows-password"
+#   value        = random_password.password.result
+#   key_vault_id = azurerm_key_vault.this.id
+# }
