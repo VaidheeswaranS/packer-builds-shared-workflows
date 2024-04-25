@@ -30,6 +30,14 @@ on:
         required: true
         type: string
         description: Name of the destination image definition for generalized image.
+      vnet_cidr:
+        required: true
+        type: string
+        description: CIDR range to deploy VM testing environment.
+      ad_group:
+        required: true
+        type: string
+        description: Name of the team's AD group in the Azure tenant.
       client_id:
         required: true
         type: string
@@ -55,6 +63,8 @@ env:
   TF_VAR_shared_gallery: ${{ inputs.compute_gallery }}
   TF_VAR_image_definition_baseline: ${{ inputs.image_definition_baseline }}
   TF_VAR_image_definition_generalized: ${{ inputs.image_definition_generalized }}
+  TF_VAR_vnet_cidr: ${{ inputs.vnet_cidr }}
+  TF_VAR_ad_group: ${{ inputs.ad_group }}
   WD: called/${{ inputs.terraform_folder }}
 
 jobs:
