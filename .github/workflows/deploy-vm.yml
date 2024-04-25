@@ -63,7 +63,7 @@ jobs:
       - name: Checkout shared-workflows repository
         uses: actions/checkout@v4
         with:
-          repository: sage/cloudops-shared-workflows
+          repository: VaidheeswaranS/packer-builds-shared-workflows
           path: called
 
       - name: Pull TFVars
