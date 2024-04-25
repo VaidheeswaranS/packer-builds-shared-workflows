@@ -26,7 +26,12 @@ variable "shared_gallery" {
   type        = string
 }
 
-variable "shared_image" {
+# variable "shared_image" {
+#   description = "The name of the image within the Shared Image Gallery"
+#   type        = string
+# }
+
+variable "shared_image_generalized" {
   description = "The name of the image within the Shared Image Gallery"
   type        = string
 }

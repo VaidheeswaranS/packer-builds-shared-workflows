@@ -10,7 +10,8 @@ module "virtualmachine" {
   resource_group_name               = var.resource_group != null ? var.resource_group : var.image_gallery_resource_group
   image_gallery_resource_group_name = var.image_gallery_resource_group
   location                          = var.location
-  shared_image_name                 = var.shared_image
+  # shared_image_name                 = var.shared_image
+  shared_image_name                 = var.shared_image_generalized
   subnet_ids                        = [var.subnet]
   vm_name                           = var.vm_name
   vm_size                           = var.vm_size
