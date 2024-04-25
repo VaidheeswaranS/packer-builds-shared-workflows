@@ -33,9 +33,6 @@ on:
         type: string
         description:  Azure service princiapl subscription ID.
     secrets:
-      github-token:
-        required: true
-        description: Shared github access token.
       client_secret:
         required: true
         description: Azure service principal client secret.
@@ -68,7 +65,6 @@ jobs:
         with:
           repository: sage/cloudops-shared-workflows
           path: called
-          token: ${{ secrets.github-token }}
 
       - name: Pull TFVars
         uses: actions/download-artifact@v4
