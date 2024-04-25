@@ -28,7 +28,7 @@ resource "azurerm_shared_image" "baseline" {
   identifier {
     publisher = "Microsoft"
     offer     = "WindowsServer"
-    sku       = random_id.baseline.hex
+    sku       = random_id.baseline.*.hex
   }
 }
 
