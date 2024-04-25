@@ -106,13 +106,13 @@ jobs:
         id: validate
         run: terraform validate
 
-      - name: Terraform Destory
-        id: destroy
-        run: terraform destroy -auto-approve -input=false
+      # - name: Terraform Destory
+      #   id: destroy
+      #   run: terraform destroy -auto-approve -input=false
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
 
       # - name: Terraform Apply
       #   id: apply
