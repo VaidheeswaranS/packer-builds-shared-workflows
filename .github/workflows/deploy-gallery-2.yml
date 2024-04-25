@@ -108,7 +108,7 @@ jobs:
 
       - name: Terraform Destory
         id: destroy
-        run: terrafrom destroy -auto-approve -input=false
+        run: terraform destroy -auto-approve -input=false
 
       # - name: Terraform Plan
       #   id: plan
