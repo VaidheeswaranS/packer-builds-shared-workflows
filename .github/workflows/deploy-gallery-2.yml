@@ -110,20 +110,20 @@ jobs:
         id: plan
         run: terraform plan
 
-      # - name: Terraform Apply
-      #   id: apply
-      #   run: terraform apply -auto-approve -input=false
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve -input=false
 
-      # - name: Terraform Output
-      #   id: outputs
-      #   run: terraform output
+      - name: Terraform Output
+        id: outputs
+        run: terraform output
 
-      # - name: Create TFVars
-      #   id: tfvars
-      #   run: echo '${{ steps.outputs.outputs.stdout }}' > gallery.tfvars
+      - name: Create TFVars
+        id: tfvars
+        run: echo '${{ steps.outputs.outputs.stdout }}' > gallery.tfvars
       
-      # - name: Upload TFVars
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: gallery.tfvars
-      #     path: ${{ env.WD }}/gallery.tfvars
+      - name: Upload TFVars
+        uses: actions/upload-artifact@v4
+        with:
+          name: gallery.tfvars
+          path: ${{ env.WD }}/gallery.tfvars
