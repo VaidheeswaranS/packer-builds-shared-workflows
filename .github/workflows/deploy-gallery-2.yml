@@ -118,25 +118,24 @@ jobs:
         id: state
         run: terraform state list
 
-      - name: Terraform apply refresh
-        id: refresh
-        run: terraform apply -refresh-only
-        
-
-      # - name: Terraform Apply
-      #   id: apply
-      #   run: terraform apply -auto-approve -input=false
-
-      # - name: Terraform Output
-      #   id: outputs
-      #   run: terraform output
-
-      # - name: Create TFVars
-      #   id: tfvars
-      #   run: echo '${{ steps.outputs.outputs.stdout }}' > gallery.tfvars
+      # - name: Terraform apply refresh
+      #   id: refresh
+      #   run: terraform apply -refresh-only
       
-      # - name: Upload TFVars
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: gallery.tfvars
-      #     path: ${{ env.WD }}/gallery.tfvars
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve -input=false
+
+      - name: Terraform Output
+        id: outputs
+        run: terraform output
+
+      - name: Create TFVars
+        id: tfvars
+        run: echo '${{ steps.outputs.outputs.stdout }}' > gallery.tfvars
+      
+      - name: Upload TFVars
+        uses: actions/upload-artifact@v4
+        with:
+          name: gallery.tfvars
+          path: ${{ env.WD }}/gallery.tfvars
