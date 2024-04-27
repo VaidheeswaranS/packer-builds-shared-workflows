@@ -90,6 +90,6 @@ jobs:
         id: validate
         run: terraform validate
 
-      # - name: Terraform Apply
-      #   id: apply
-      #   run: terraform apply -var-file=gallery.tfvars -var 'vm_name=${{ inputs.vm_name }}' -auto-approve -input=false
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -var-file=gallery.tfvars -var 'vm_name=${{ inputs.vm_name }}' -auto-approve -input=false
