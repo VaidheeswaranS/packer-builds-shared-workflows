@@ -79,6 +79,8 @@ jobs:
         run: "packer validate ."
         env:
           PKR_VAR_baseline_image_gallery_subscription: "${{ inputs.subscription_id }}"
+          PKR_VAR_encoded_credentials: "${{ secrets.encoded_credentials }}"
+          PKR_VAR_aqua_token: "${{ secrets.aqua_token }}"
 
       - name: Generate build number
         id: buildnumber
