@@ -18,7 +18,6 @@ resource "random_id" "baseline" {
 }
 
 resource "azurerm_shared_image" "baseline" {
-  # count                    = var.image_definition_baseline == "cloudops-shared-baseline-windows2022" ? 1 : 0
   count                    = var.image_definition_baseline == "vaidhee-shared-baseline-windows2022" ? 1 : 0
   name                     = var.image_definition_baseline
   gallery_name             = azurerm_shared_image_gallery.this.name
