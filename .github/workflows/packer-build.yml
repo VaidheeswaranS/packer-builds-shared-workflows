@@ -39,6 +39,12 @@ on:
       client_secret:
         required: true
         description:  Azure service princiapl client secret.
+      encoded_credentials:
+        required: false
+        description: The encoded credentials needed for the baseline script
+      aqua_token:
+        required: false
+        description: The aqua token needed for the baseline script
 
 jobs:
   build:
@@ -90,5 +96,5 @@ jobs:
           PKR_VAR_shared_image_gallery: "${{ inputs.compute_gallery }}"
           PKR_VAR_shared_image: "${{ inputs.image_definition }}"
           PKR_VAR_baseline_image_gallery_subscription: "${{ inputs.subscription_id }}"
-          PKR_VAR_encoded_credentials: "${{ secrets.ENCODED_CREDENTIALS }}"
-          PKR_VAR_aqua_token: "${{ secrets.AQUA_TOKEN }}"
+          PKR_VAR_encoded_credentials: "${{ secrets.encoded_credentials }}"
+          PKR_VAR_aqua_token: "${{ secrets.aqua_token }}"
